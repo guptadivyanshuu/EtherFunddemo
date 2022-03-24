@@ -53,3 +53,14 @@
 .CreateCampaignFormButton {
   margin-top: 25px;
 }
+
+.NavLogo{
+    color: white;
+    font-weight: bolder;
+    background-color: teal;
+}
+
+.NavImg{
+    height: 2%;
+    width: 2%;
+}
