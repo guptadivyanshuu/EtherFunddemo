@@ -33,7 +33,7 @@ class CampaignNew extends Component {
           from: accounts[0],
         });
 
-      Router.pushRoute("/");
+      Router.pushRoute("/view");
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
