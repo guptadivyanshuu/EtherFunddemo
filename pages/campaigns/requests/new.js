@@ -49,7 +49,7 @@ class RequestNew extends Component {
         <h3>Create a Request</h3>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Description</label>
+            <div>Description</div>
             <Input
               value={this.state.description}
               onChange={(event) =>
@@ -58,14 +58,14 @@ class RequestNew extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Value in Ether</label>
+            <div>Value in Ether</div>
             <Input
               value={this.state.value}
               onChange={(event) => this.setState({ value: event.target.value })}
             />
           </Form.Field>
           <Form.Field>
-            <label>Recipient</label>
+            <div>Recipient</div>
             <Input
               value={this.state.recipient}
               onChange={(event) =>

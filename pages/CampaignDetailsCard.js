@@ -10,20 +10,30 @@ export default function CampaignDetailsCard(props) {
                 <Image style={{ marginLeft: '260px', paddingBottom: '10px' }}
                     size='small'
                     circular
-                    src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
+                    src={props.img}
                 />
                 {/* <Card.Header>Address of Manager: {props.address}</Card.Header> */}
                 {/* <Card.Meta>Open Campaign</Card.Meta> */}
                 <Card.Description>
+                    <div className={classes.CampaignDetailsCardDiv}>
+                        <div className={classes.CampaignDetailsCardHeading}>Title:</div>
+                        <div className={classes.CampaignDetailsCardSubHeading}><em>{props.title}</em></div>
+                        <p className={classes.CampaignDetailsCardParagraph}>Name of the campaign</p>
+                    </div>
+                    <div className={classes.CampaignDetailsCardDiv}>
+                        <div className={classes.CampaignDetailsCardHeading}>Description:</div>
+                        <div className={classes.CampaignDetailsCardSubHeading}><em>{props.description}</em></div>
+                        <p className={classes.CampaignDetailsCardParagraph}>Information about the campaign</p>
+                    </div>
                     <div className={classes.CampaignDetailsCardDiv}>
                         <div className={classes.CampaignDetailsCardHeading}>Address of Manager:</div>
                         <div className={classes.CampaignDetailsCardSubHeading}><em>{props.manager}</em></div>
                         <p className={classes.CampaignDetailsCardParagraph}>The manager created this campaign and can create requests to withdraw money</p>
                     </div>
                     <div className={classes.CampaignDetailsCardDiv}>
-                        <div className={classes.CampaignDetailsCardHeading}>Minimum Contribution (wei):</div>
+                        <div className={classes.CampaignDetailsCardHeading}>Contribution Amount (wei):</div>
                         <div className={classes.CampaignDetailsCardSubHeading}><em>{props.minimumContribution}</em></div>
-                        <p className={classes.CampaignDetailsCardParagraph}>You must contribute at least this much wei to become an approver</p>
+                        <p className={classes.CampaignDetailsCardParagraph}>You must contribute only this much wei to become an approver</p>
                     </div>
                     <div className={classes.CampaignDetailsCardDiv}>
                         <div className={classes.CampaignDetailsCardHeading}>Number of Requests:</div>

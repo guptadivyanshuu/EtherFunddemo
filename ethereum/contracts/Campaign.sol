@@ -1,10 +1,11 @@
 pragma solidity ^0.4.17;
 
+//contract to deploy multiple campaigns. 
 contract CampaignFactory {
     address[] public deployedCampaigns;
 
-    function createCampaign(uint minimum) public {
-        address newCampaign = new Campaign(minimum, msg.sender);
+    function createCampaign(uint minimum,string title,string description,string img) public {
+        address newCampaign = new Campaign(minimum, msg.sender,title,description,img);
         deployedCampaigns.push(newCampaign);
     }
 
@@ -13,6 +14,7 @@ contract CampaignFactory {
     }
 }
 
+//campaign contract 
 contract Campaign {
     struct Request {
         string description;
@@ -22,7 +24,11 @@ contract Campaign {
         uint approvalCount;
         mapping(address => bool) approvals;
     }
-
+    //valiables for campaign
+    string public title;
+    string public description;
+    string public img;
+    //valiables for requests 
     Request[] public requests;
     address public manager;
     uint public minimumContribution;
@@ -34,10 +40,14 @@ contract Campaign {
         _;
     }
 
-    function Campaign(uint minimum, address creator) public {
+    function Campaign(uint minimum, address creator,string temptitle,string tempdescription,string tempimg) public {
         manager = creator;
         minimumContribution = minimum;
+            title= temptitle;
+            description= tempdescription;
+            img= tempimg;
     }
+
 
     function contribute() public payable {
         require(msg.value == minimumContribution);
@@ -46,9 +56,9 @@ contract Campaign {
         approversCount++;
     }
 
-    function createRequest(string description, uint value, address recipient) public restricted {
+    function createRequest(string tempdescription, uint value, address recipient) public restricted {
         Request memory newRequest = Request({
-           description: description,
+           description: tempdescription,
            value: value,
            recipient: recipient,
            complete: false,
@@ -78,15 +88,18 @@ contract Campaign {
         request.complete = true;
     }
     
-    function getSummary() public view returns (
-      uint, uint, uint, uint, address
+    function getRequestSummary() public view returns (
+      uint, uint, uint, uint, address, string, string, string
       ) {
         return (
           minimumContribution,
           this.balance,
           requests.length,
           approversCount,
-          manager
+          manager,
+          title,
+          description,
+          img
         );
     }
     

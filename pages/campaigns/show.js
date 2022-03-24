@@ -9,10 +9,21 @@ import CampaignDetailsCard from '../CampaignDetailsCard';
 
 class CampaignShow extends Component {
   static async getInitialProps(props) {
-    const campaign = Campaign(props.query.address);
-    const summary = await campaign.methods.getSummary().call();
-    console.log("summary: " + summary);
 
+    const campaign = Campaign(props.query.address);
+    // const data = await campaign.methods.getCampaignSummary().call();
+    // console.log(data);
+    console.log(props.query);
+    const summary = await campaign.methods.getRequestSummary().call();
+    console.log("summary: " + summary);
+    console.log(summary[0]);
+    console.log(summary[1]);
+    console.log(summary[2]);
+    console.log(summary[3]);
+    console.log(summary[4]);
+    console.log(summary[5]);
+    console.log(summary[6]);
+    console.log(summary[7]);
     return {
       address: props.query.address,
       minimumContribution: summary[0],
@@ -20,6 +31,9 @@ class CampaignShow extends Component {
       requestsCount: summary[2],
       approversCount: summary[3],
       manager: summary[4],
+      title: summary[5],
+      description: summary[6],
+      img: summary[7]
     };
   }
 
@@ -30,6 +44,9 @@ class CampaignShow extends Component {
       minimumContribution,
       requestsCount,
       approversCount,
+      title,
+      description,
+      img
     } = this.props;
 
     const items = [
@@ -42,7 +59,7 @@ class CampaignShow extends Component {
       },
       {
         header: minimumContribution,
-        meta: "Minimum Contribution (wei)",
+        meta: "Contribution (wei)",
         description:
           "You must contribute at least this much wei to become an approver",
       },
@@ -65,7 +82,7 @@ class CampaignShow extends Component {
           "The balance is how much money this campaign has left to spend.",
       },
     ];
-    return <CampaignDetailsCard address={this.props.address} manager={manager} minimumContribution={minimumContribution} requestsCount={requestsCount} approversCount={approversCount} balance={web3.utils.fromWei(balance, "ether")}></CampaignDetailsCard>
+    return <CampaignDetailsCard address={this.props.address} manager={manager} minimumContribution={minimumContribution} requestsCount={requestsCount} approversCount={approversCount} balance={web3.utils.fromWei(balance, "ether")} title={title} description={description} img={img}></CampaignDetailsCard>
     // return <Card.Group items={items} />;
   }
 
