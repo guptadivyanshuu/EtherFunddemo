@@ -89,7 +89,7 @@ contract Campaign {
     }
     
     function getRequestSummary() public view returns (
-      uint, uint, uint, uint, address, string, string, string
+      uint, uint, uint, uint, address,string,string,string
       ) {
         return (
           minimumContribution,
@@ -100,6 +100,7 @@ contract Campaign {
           title,
           description,
           img
+
         );
     }
     

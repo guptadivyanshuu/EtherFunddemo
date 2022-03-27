@@ -4,8 +4,8 @@ import Layout from "../../components/Layout";
 import factory from "../../ethereum/factory";
 import web3 from "../../ethereum/web3";
 import { Router } from "../../routes";
-import { TextArea, Grid, Image } from 'semantic-ui-react';
-import classes from '../index.module.css';
+import { TextArea, Grid, Image } from "semantic-ui-react";
+import classes from "../index.module.css";
 
 class CampaignNew extends Component {
   state = {
@@ -28,7 +28,12 @@ class CampaignNew extends Component {
       console.log(this.state.img);
       const accounts = await web3.eth.getAccounts();
       await factory.methods
-        .createCampaign(this.state.minimumContribution, this.state.title, this.state.description, this.state.img)
+        .createCampaign(
+          this.state.minimumContribution,
+          this.state.title,
+          this.state.description,
+          this.state.img
+        )
         .send({
           from: accounts[0],
         });
@@ -49,11 +54,14 @@ class CampaignNew extends Component {
             <Grid.Column>
               <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
-                  <div className={classes.CreateCampaignFormLabel}>Minimum Contribution</div>
+                  <div className={classes.CreateCampaignFormLabel}>
+                    Contribution
+                  </div>
                   <Input
                     label="wei"
                     labelPosition="right"
                     value={this.state.minimumContribution}
+                    placeholder="Amount to become an investor for the campaign"
                     onChange={(event) =>
                       this.setState({ minimumContribution: event.target.value })
                     }
@@ -67,24 +75,22 @@ class CampaignNew extends Component {
                     }
                     className={classes.CreateCampaignFormField}
                   />
-                  <div className={classes.CreateCampaignFormLabel}>Description</div>
-                  {/* <Input
-              labelPosition="right"
-              value={this.state.description}
-              onChange={(event) =>
-                this.setState({ description: event.target.value })
-              }
-            /> */}
+                  <div className={classes.CreateCampaignFormLabel}>
+                    Description
+                  </div>
+                  {}
                   <TextArea
                     rows={3}
                     value={this.state.description}
                     onChange={(event) =>
                       this.setState({ description: event.target.value })
                     }
-                    placeholder='Brief description about your campaign'
+                    placeholder="Brief description about your campaign"
                     className={classes.CreateCampaignFormField}
                   />
-                  <div className={classes.CreateCampaignFormLabel}>Image URL</div>
+                  <div className={classes.CreateCampaignFormLabel}>
+                    Image Link
+                  </div>
                   <Input
                     value={this.state.img}
                     onChange={(event) =>
@@ -93,11 +99,16 @@ class CampaignNew extends Component {
                     className={classes.CreateCampaignFormField}
                   />
                 </Form.Field>
-                <Message error header="Oops!" content={this.state.errorMessage} />
+                <Message
+                  error
+                  header="Oops!"
+                  content={this.state.errorMessage}
+                />
                 <div className={classes.CreateCampaignFormButton}>
                   <Button
                     style={{ backgroundColor: "teal", color: "white" }}
-                    loading={this.state.loading}>
+                    loading={this.state.loading}
+                  >
                     Create!
                   </Button>
                 </div>
@@ -107,13 +118,13 @@ class CampaignNew extends Component {
             <Grid.Column>
               <Image
                 className={classes.CreateCampaignFormImg}
-                src='https://cdn-icons-png.flaticon.com/512/1138/1138232.png'
+                src="https://cdn-icons-png.flaticon.com/512/1138/1138232.png"
                 size="medium"
-                centered />
+                centered
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>
-
       </Layout>
     );
   }
