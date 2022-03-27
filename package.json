@@ -27,5 +27,8 @@
     "solc": "^0.4.17",
     "url-loader": "^4.1.1",
     "web3": "^1.6.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
